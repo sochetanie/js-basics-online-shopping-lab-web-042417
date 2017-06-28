@@ -1,62 +1,67 @@
-var cart = []
+let cart = [];
 
 function getCart() {
- return cart
+ return cart;
 }
 
 function setCart(c) {
-  cart = c
+  cart = c;
+  return cart;
 }
 
 function addToCart(item) {
-    var price = Math.floor(Math.random() * 100)
-    cart.push({[item]: price})
-    console.log(`${item} has been added to your cart.`)
-    return cart
+ // write your code here
+ let price = Math.floor((Math.random() * 100) + 1)
+ cart.push({[item]: price})
+ console.log(`${item} has been added to your cart.`)
+ return cart
 }
 
 function viewCart() {
-    if (cart.length === 0) {
-        console.log("Your shopping cart is empty.")
+  // write your code here
+  if (cart.length === 0) {
+    console.log('Your shopping cart is empty.')
+  }
+  var result = 'In your cart, you have '
+  for (let i=0; i<cart.length; i++) {
+    if (i != cart.length - 1){
+        // debugger
+      result += `${Object.keys(cart[i])} at $${Object.values(cart[i])}, `
     } else {
-        var message = "In your cart, you have "
-        for (let item of cart) {
-            for (let name in item) {
-                message += `${name} at $${item[name]}, `
-            }
-        }
-        var newMessage = message.slice(0, -2)
-        console.log(`${newMessage}.`)
+      result += `${Object.keys(cart[i])} at $${Object.values(cart[i])}.`
     }
+  }
+  console.log(result)
 }
 
 function total() {
-    var total = 0
-    for (let item of cart) {
-        for (let name in item) {
-            total += item[name]
-        }
-    }
-    return total
+  // write your code here
+  let sumArr = []
+  for (let i=0; i<cart.length; i++) {
+        // debugger
+    sumArr.push(parseInt(Object.values(cart[i])))
+  }
+    return sumArr.reduce((a, b) => a + b, 0)
 }
 
 function removeFromCart(item) {
-    for (let i=0; i<=cart.length; i++) {
-        if (cart.length === 0 || !cart[i].hasOwnProperty(item)) {
-            console.log('That item is not in your cart.')
-        } else {
-            cart.splice(i, 1)
-            return cart
-        }
+  // write your code here
+  for (let i=0; i<cart.length; i++) {
+        debugger
+    if (cart[i].hasOwnProperty(item)) {
+        cart = []
     }
+    return cart
+  }
+  console.log('That item is not in your cart.')
 }
 
 function placeOrder(cardNumber) {
-    if (cardNumber == undefined) {
-        console.log("We don't have a credit card on file for you to place your order.")
-    } else {
-        console.log(`Your total cost is $${total()}, which will be charged to the card ${cardNumber}.`)
-        cart = []
-    }
+  // write your code here
+  if (!cardNumber) {
+    console.log("We don't have a credit card on file for you to place your order.")
+  }
+  console.log(`Your total cost is $${total()}, which will be charged to the card ${cardNumber}.`)
+  cart = []
+  return cart
 }
-
